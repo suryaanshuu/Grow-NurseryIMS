@@ -1,17 +1,25 @@
 "use client"
 
 import React, {useState, useEffect}  from 'react';
-import App from './App';  // Adjust the path as needed
-import getPlantData from './api/getPlantData'; // Adjust the path
+//import App from './App';  // Adjust the path as needed
+import {getPlantData} from './api/getPlantData'; // Adjust the path
+import { useRouter } from 'next/router';
 
 function MyPage() {
   const [inputValue, setInputValue] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+  //const [error, setError] = useState<string | null>(null);
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('Submitted: ', inputValue);
     setInputValue('');    
-
+    const data = await getPlantData(inputValue);
+    router.push('./App');
+    // return (
+    //   <div>
+    //     <App data={data} />
+    //   </div>
+    // );
   }
 
 return (
@@ -25,7 +33,6 @@ return (
     </form>
   </div>
 )
-
 }
 
 export default MyPage;

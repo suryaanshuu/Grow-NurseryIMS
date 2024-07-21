@@ -1,7 +1,7 @@
 import './globals.css';
 // import './index.css'
 
-function App() {
+function App(data) {
 
   return (
 <div> {/*Body*/}
