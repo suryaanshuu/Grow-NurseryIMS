@@ -3,7 +3,7 @@ import React from 'react'
 const MarketingBox = () => {
   return (
     <div>
-              <div className='antialiased font-sans flex justify-between'>
+        <div className='antialiased font-sans flex justify-between'>
 
         <div>
           <div className='font-bold text-5xl ml-9 mt-9 mr-11'>
@@ -17,11 +17,14 @@ const MarketingBox = () => {
           </div>
 
           <img src='Animation.gif'></img>
-        </div> 
-
+        </div>
+        
         <img src='Plant2.png'></img>
 
-      </div>      
+      </div> 
+      <br></br>
+      
+      
     </div>
   )
 }
