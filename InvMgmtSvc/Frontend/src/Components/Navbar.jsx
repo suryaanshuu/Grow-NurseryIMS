@@ -1,12 +1,13 @@
 import React from 'react'
-
+import GrowLogo from '../../public/growLogoX.png'
+  
 const Navbar = () => {
   return (
     <div>
       <nav className="flex justify-between shadow-md items-center rounded-[15px]">
 
       <div className=''> {/*md:flex-wrap lg:flex-nowrap xl:justify-start*/}
-        <img className='h-[100px] w-[100px] overflow-hidden' src='growLogoX.png'></img>
+        <img className='h-[100px] w-[100px] overflow-hidden' src={GrowLogo}></img>
       </div>
 
       <ul className='flex justify-between'>

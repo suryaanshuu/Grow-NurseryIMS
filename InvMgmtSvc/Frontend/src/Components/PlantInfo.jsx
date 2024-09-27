@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import InfoBox from './InfoBox';
+import MarketingBox from './MarketingBox';
 
 const PlantInfo = () => {
   const { plantName } = useParams();
@@ -24,7 +25,9 @@ const PlantInfo = () => {
   console.log("Data in Component:",data);
 
   return (
+
     <div>
+      <MarketingBox /> 
       <InfoBox key={JSON.stringify(data)} data={data} />
     </div>
   );

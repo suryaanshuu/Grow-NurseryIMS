@@ -1,4 +1,6 @@
 import React from 'react'
+import animationGif from '../../public/Animation.gif'
+import plantInHands from '../../public/Plant2.png'
 
 const MarketingBox = () => {
   return (
@@ -16,10 +18,10 @@ const MarketingBox = () => {
             Citrus, Fruits, Herbs and more...
           </div>
 
-          <img src='Animation.gif'></img>
+          <img src={animationGif} alt='Animation'></img>
         </div>
         
-        <img src='Plant2.png'></img>
+        <img src={plantInHands} alt='Plant Image with Hand'></img>
 
       </div> 
       <br></br>

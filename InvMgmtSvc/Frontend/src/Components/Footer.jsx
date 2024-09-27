@@ -1,11 +1,12 @@
 import React from 'react'
+import whiteLogo from '../../public/growLogoWhite.png'
 
 const Footer = () => {
   return (
       <div>
         <footer className='bg-gray-900 antialiased font-medium mt-4 flex justify-between'>
         <div className='mt-9'>
-          <img src='growLogoWhite.png' className='h-[200px] w-[200px] overflow-hidden'></img><br></br>
+          <img src={whiteLogo} className='h-[200px] w-[200px] overflow-hidden'></img><br></br>
           <div className='ml-9 text-white mb-4'>
             copyright © 2024 Grow.<br></br>
             All right reserved.
