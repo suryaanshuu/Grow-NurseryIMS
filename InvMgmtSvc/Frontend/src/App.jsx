@@ -17,6 +17,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPageBody from './Components/LandingPageBody';
 import PlantInfo from './Components/PlantInfo';
 import QRCodeGenerator from './Components/QRCodeGenerator';
+import Invoice from './Components/Invoice';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/plant/:plantName" element={<PlantInfo  />} />
             <Route path="*" element={<div>Not Found</div>} />
             <Route path='/QRCodeGenerator' element={<QRCodeGenerator />} />
+            <Route path='/Invoice' element={<Invoice />} />
           </Routes>
         </main>
       </div>

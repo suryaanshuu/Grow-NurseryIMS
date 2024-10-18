@@ -12,7 +12,8 @@ const LandingPageBody = () => {
     <div>
       <MarketingBox />      
       
-      <InfoBox data = {PlantInfo} />
+      <InfoBox data={PlantInfo} />
+      
     </div>
   )
 }
