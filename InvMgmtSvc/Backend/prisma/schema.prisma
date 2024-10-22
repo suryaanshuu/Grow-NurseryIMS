@@ -1,11 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -23,45 +17,41 @@ model customer {
 }
 
 model nurseplant {
-  name      String    @unique @db.VarChar(75)
-  batch_no  Int       @unique
-  serial_no Int
-  plant     plant     @relation(fields: [name], references: [name], onDelete: NoAction, onUpdate: NoAction)
-  pricing   pricing[]
-  stock     stock[]
+  name     String  @db.VarChar(75)
+  batch_no Int
+  loc      String? @db.VarChar(25)
+  stock    Int?
+  plant    plant   @relation(fields: [name], references: [name], onDelete: NoAction, onUpdate: NoAction)
 
-  @@id([name, batch_no, serial_no])
+  @@id([name, batch_no])
 }
 
 model plant {
-  name        String      @id @db.VarChar(75)
-  water       String?     @db.VarChar(10)
-  sunlight    String?     @db.VarChar(10)
+  name        String       @id @db.VarChar(75)
+  water       String?      @db.VarChar(10)
+  sunlight    String?      @db.VarChar(10)
   lifespan    Int?
-  height      Float?      @db.Real
-  fruit_nut   String?     @db.Char(1)
-  soil_ph     Float?      @db.Real
-  temperature Float?      @db.Real
-  fertilizer  String?     @db.VarChar(25)
-  pest        String?     @db.VarChar(75)
-  comp_plants String?     @db.VarChar(75)
-  nurseplant  nurseplant?
+  height      Float?       @db.Real
+  fruit_nut   String?      @db.Char(1)
+  soil_ph     Float?       @db.Real
+  temperature Float?       @db.Real
+  fertilizer  String?      @db.VarChar(25)
+  pest        String?      @db.VarChar(75)
+  comp_plants String?      @db.VarChar(75)
+  nurseplant  nurseplant[]
   pricing     pricing[]
   seed        seed[]
-  stock       stock[]
 }
 
 model pricing {
-  pl_name     String     @db.VarChar(75)
+  id          Int    @id @default(autoincrement())
+  pl_name     String @db.VarChar(75)
   batch_no    Int
   units       Int?
-  unit_price  Float?     @db.Real
-  total_price Float?     @db.Real
-  tax         Float?     @db.Real
-  nurseplant  nurseplant @relation(fields: [batch_no], references: [batch_no], onDelete: NoAction, onUpdate: NoAction)
-  plant       plant      @relation(fields: [pl_name], references: [name], onDelete: NoAction, onUpdate: NoAction)
-
-  @@id([pl_name, batch_no])
+  unit_price  Float? @db.Real
+  total_price Float? @db.Real
+  tax         Float? @db.Real
+  plant       plant  @relation(fields: [pl_name], references: [name], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model seed {
@@ -80,17 +70,6 @@ model seed {
   @@id([sid, pl_name])
 }
 
-model stock {
-  pl_name    String     @db.VarChar(75)
-  batch_no   Int
-  loc        String?    @db.VarChar(25)
-  stock      Int?
-  nurseplant nurseplant @relation(fields: [batch_no], references: [batch_no], onDelete: NoAction, onUpdate: NoAction)
-  plant      plant      @relation(fields: [pl_name], references: [name], onDelete: NoAction, onUpdate: NoAction)
-
-  @@id([pl_name, batch_no])
-}
-
 model supplier {
   sid       Int                      @id
   name      String?                  @db.VarChar(75)
@@ -99,4 +78,11 @@ model supplier {
   address   String?                  @db.VarChar(150)
   lead_time Unsupported("interval")?
   seed      seed[]
+}
+
+model adminuser {
+  id             Int     @id @default(autoincrement())
+  username       String?
+  email          String?
+  hashedpassword String?
 }

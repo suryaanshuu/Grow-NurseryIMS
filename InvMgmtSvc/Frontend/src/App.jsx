@@ -46,6 +46,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import LandingPageBody from './Components/LandingPageBody';
 import PlantInfo from './Components/PlantInfo';
+import AddPlant from './Components/AddPlant';
+import UpdateStock from './Components/UpdateStock';
 import QRCodeGenerator from './Components/QRCodeGenerator';
 import Login from './Components/Login';
 import Admin from './Components/Admin';
@@ -69,6 +71,8 @@ function App() {
         </ProtectedRoute>
         } />
         <Route path="/" element={<LandingPageBody />} exact />
+        <Route path="/addplant" element={<AddPlant />} />
+        <Route path="/updatestock" element={<UpdateStock />} />
         <Route path="/plant/:plantName" element={<PlantInfo  />} />
         <Route path="*" element={<div>Not Found</div>} />
         <Route path='/QRCodeGenerator' element={<QRCodeGenerator />} />
