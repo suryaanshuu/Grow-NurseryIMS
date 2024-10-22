@@ -32,10 +32,45 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const getUserById = require("./dbQueries/getUserByID");
+const jwt = require('jsonwebtoken');
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
+
+const users = [
+  { username: 'admin', password: 'password' },
+];
+
+// const authenticateToken = (req, res, next) => {
+//   const authHeader = req.headers['authorization'];
+//   const token = authHeader && authHeader.split(' ')[1];
+//   if (token == null) return res.sendStatus(401);
+
+//   jwt.verify(token, 'your-secret-key', (err, user) => {
+//     if (err) return res.sendStatus(403);
+//     req.user = user;
+//     next();
+//   });
+// };
+
+
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  const user = users.find((user) => user.username === username && user.password === password);
+  if (user) {
+    const token = jwt.sign({ username: user.username }, 'your-secret-key', { expiresIn: '1h' });
+    console.log('Login successful, sending token');
+    res.json({ token });
+  } else {
+    console.log('Login failed');
+    res.status(401).json({ error: 'Invalid username or password' });
+  }
+});
+
+// app.get('/api/protected', authenticateToken, (req, res) => {
+//   res.json({ message: 'This is a protected route' });
+// });
 
 // Add a new GET endpoint to handle the request
 app.get('/api/plant', async (req, res) => {
