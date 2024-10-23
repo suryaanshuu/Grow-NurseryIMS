@@ -49,6 +49,7 @@ import PlantInfo from './Components/PlantInfo';
 import AddPlant from './Components/AddPlant';
 import UpdateStock from './Components/UpdateStock';
 import QRCodeGenerator from './Components/QRCodeGenerator';
+import Invoice from './Components/Invoice';
 import Login from './Components/Login';
 import Admin from './Components/Admin';
 
@@ -74,6 +75,7 @@ function App() {
         <Route path="/addplant" element={<AddPlant />} />
         <Route path="/updatestock" element={<UpdateStock />} />
         <Route path="/plant/:plantName" element={<PlantInfo  />} />
+        <Route path='/Invoice' element={<Invoice />} />
         <Route path="*" element={<div>Not Found</div>} />
         <Route path='/QRCodeGenerator' element={<QRCodeGenerator />} />
       </Routes>

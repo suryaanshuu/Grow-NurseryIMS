@@ -112,6 +112,21 @@ app.post('/api/plant', async (req, res) => {
   //get the plantName and send it to getUserByID
   //send the relevant response back to the client
   try {
+    console.log("hey", plantName)
+    const data = await getUserById(plantName);
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: 'Error retrieving data' });
+  }
+});
+
+app.get('/api/plant', async (req, res) => {
+  const plantName = req.query.name;  
+  //get the plantName and send it to getUserByID
+  //send the relevant response back to the client
+  try {
+    console.log("hey", plantName)
     const data = await getUserById(plantName);
     res.json(data);
   } catch (error) {
