@@ -11,10 +11,10 @@ const Navbar = () => {
       </div>
 
       <ul className='flex justify-between'>
-        <a href=''>< li className="mr-4 font-bold font-sans text-lg text-slate-500 text-balance antialiased hover:text-green-600">Home</li></a>
+        <a href='/'>< li className="mr-4 font-bold font-sans text-lg text-slate-500 text-balance antialiased hover:text-green-600">Home</li></a>
         <a href='#'><li className="mr-4 font-bold font-sans text-lg text-slate-500 text-balance antialiased hover:text-green-600">Products</li></a>
         <a href='#'><li className="mr-4 font-bold font-sans text-lg text-slate-500 text-balance antialiased hover:text-green-600">Contact Us</li></a>
-        <a href='#'><li className="mr-4 font-bold font-sans text-lg text-slate-500 text-balance antialiased hover:text-green-600">About Us</li></a>
+        <a href='/Invoice'><li className="mr-4 font-bold font-sans text-lg text-slate-500 text-balance antialiased hover:text-green-600">Invoice</li></a>
       </ul>
 
       </nav>
