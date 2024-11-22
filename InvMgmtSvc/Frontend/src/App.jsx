@@ -52,6 +52,7 @@ import QRCodeGenerator from './Components/QRCodeGenerator';
 import Invoice from './Components/Invoice';
 import Login from './Components/Login';
 import Admin from './Components/Admin';
+import UpdatePricing from './Components/UpdatePricing';
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -74,6 +75,7 @@ function App() {
         <Route path="/" element={<LandingPageBody />} exact />
         <Route path="/addplant" element={<AddPlant />} />
         <Route path="/updatestock" element={<UpdateStock />} />
+        <Route path="/updatepricing" element={<UpdatePricing />} />
         <Route path="/plant/:plantName" element={<PlantInfo  />} />
         <Route path='/Invoice' element={<Invoice />} />
         <Route path="*" element={<div>Not Found</div>} />

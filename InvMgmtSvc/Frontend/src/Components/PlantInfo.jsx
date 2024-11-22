@@ -1,63 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import InfoBox from './InfoBox';
+import useCart from './CartItem';
 import MarketingBox from './MarketingBox';
 
-const PlantInfo = ({ cartItems, setCartItems }) => {
+const PlantInfo = () => {
     const { plantName } = useParams();
-    const [data, setData] = useState(null); // Initialize data as null
-
-    // Function to add plant to cart
-    const addToCart = () => {
+    const [data, setData] = useState(null);
+    const { cart, addToCart, clearCart } = useCart();
+    
+    const addCart = async () => {
         if (!data) {
             console.error("No data available to add to cart.");
             return; // Exit if data is not available
         }
 
         console.log("Adding to cart:", data.name);
+        const initialres = await fetch(`/api/plantprice?name=${data.name}`);
+        const pricedata = JSON.parse(await initialres.json());
+        
 
-        if (!Array.isArray(cartItems)) {
-            console.error("cartItems is not an array:", cartItems);
-            return; // Exit the function if cartItems is not an array
-        }
-
-        const newCartItem = {
-            id: (cartItems.length || 0) + 1,
-            name: data.name, // Use the name from fetched data
-            price: data.price || 0, // Use the price from fetched data or default to 0
-            quantity: 1,
-        };
-
-        setCartItems([...cartItems, newCartItem]); // Update cartItems state
-        console.log("Updated cart items:", [...cartItems, newCartItem]);
+        addToCart({ name: data.name, price: pricedata.unit_price, quantity: 1 });
     };
 
+    const handleClearCart = async () => { clearCart() };
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log("Fetching data for plant:", plantName);
                 const response = await fetch(`/api/plant?name=${plantName}`);
-                const data = await response.json();
-                console.log("Received Data:", data);
+                const datastring = await response.json();
+                const data = JSON.parse(datastring)
                 setData(data); // Set data once fetched
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         };
-
+        console.log("Current cart contents:", cart);
         fetchData();
     }, [plantName]);
 
-    console.log("Data in PlantInfo Component:", data);
-
+    
     return (
         <div>
             <MarketingBox />
             <InfoBox 
                 key={JSON.stringify(data)} 
                 data={data} 
-                onAddToCart={addToCart} // Pass addToCart as a prop
+                onAddToCart={addCart} // Pass addToCart as a prop
             />
+            <div className="flex justify-end mt-4">
+                    <button 
+                        className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg"
+                        onClick={handleClearCart}
+                    >
+                        Clear Cart
+                    </button>
+            </div>
         </div>
     );
 };

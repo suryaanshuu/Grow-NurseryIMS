@@ -44,14 +44,10 @@ model plant {
 }
 
 model pricing {
-  id          Int    @id @default(autoincrement())
-  pl_name     String @db.VarChar(75)
-  batch_no    Int
-  units       Int?
-  unit_price  Float? @db.Real
-  total_price Float? @db.Real
-  tax         Float? @db.Real
-  plant       plant  @relation(fields: [pl_name], references: [name], onDelete: NoAction, onUpdate: NoAction)
+  id         Int    @id @default(autoincrement())
+  pl_name    String @db.VarChar(75) @unique
+  unit_price Float? @db.Real
+  plant      plant  @relation(fields: [pl_name], references: [name], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model seed {

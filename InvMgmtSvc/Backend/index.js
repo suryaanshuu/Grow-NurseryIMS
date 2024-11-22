@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const getUserById = require("./dbQueries/getUserByID");
+const getPriceByID = require("./dbQueries/getPriceByID");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { PrismaClient } = require('@prisma/client');
@@ -107,13 +108,34 @@ app.post('/api/updatestock', async (req, res) => {
   }
 })
 
-app.post('/api/plant', async (req, res) => {
-  const plantName = req.body.name;  
-  //get the plantName and send it to getUserByID
-  //send the relevant response back to the client
+app.post('/api/updatepricing', async (req, res) => {
+  const { plant, price } = req.body;
+  priceno = parseFloat(price);
+  try{
+    await prisma.pricing.upsert({
+      where: {
+        pl_name: plant
+      },
+      update: {
+        unit_price: priceno
+      },
+      create: {
+        pl_name: plant,
+        unit_price: priceno
+      }
+    });
+    res.status(201).json({ message: 'Price updated successfully!' });
+  }catch (error) {
+    console.error('Error updating price:', error);
+    res.status(500).json({ error: 'Error updating price. Please try again.' });
+  }
+});
+
+app.get('/api/plantprice', async (req, res) => {
+  const plantName = req.query.name;  
   try {
-    console.log("hey", plantName)
-    const data = await getUserById(plantName);
+    const data = await getPriceByID(plantName);
+    console.log(data);
     res.json(data);
   } catch (error) {
     console.error(error);
@@ -126,7 +148,6 @@ app.get('/api/plant', async (req, res) => {
   //get the plantName and send it to getUserByID
   //send the relevant response back to the client
   try {
-    console.log("hey", plantName)
     const data = await getUserById(plantName);
     res.json(data);
   } catch (error) {

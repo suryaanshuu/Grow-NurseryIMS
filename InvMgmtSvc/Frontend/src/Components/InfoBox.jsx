@@ -4,8 +4,6 @@ import { useEffect } from 'react';
 const UNKNOWN_VALUE = 'Unknown';
 
 const InfoBox = ({ data, onAddToCart }) => {
-    console.log('InfoBox data before:', data);
-
     let jsonData;
     if (typeof data === 'string') {
         jsonData = JSON.parse(data); // Parse the data string into a JSON object
@@ -27,9 +25,9 @@ const InfoBox = ({ data, onAddToCart }) => {
         comp_plants: 'Companion Plants',
     };
 
-    useEffect(() => {
-        console.log("Data updated:", data);
-    }, [data]);
+    // useEffect(() => {
+    //     console.log("Data updated:", data);
+    // }, [data]);
 
     if (!data) return null; // Check if data is null or undefined
 

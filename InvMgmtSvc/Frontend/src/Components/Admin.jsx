@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Typography, Container, Box, Paper } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import UpdateIcon from '@mui/icons-material/Update';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -19,6 +20,10 @@ const Admin = () => {
   const handleUpdateStock = () => {
     navigate('/updatestock');
   };
+
+  const handleChangePricing = () => {
+    navigate('/updatepricing');
+  }
 
   const TileButton = ({ icon: Icon, title, onClick, color }) => (
     <Paper 
@@ -83,6 +88,12 @@ const Admin = () => {
             title="Update Stock" 
             onClick={handleUpdateStock} 
             color={{ 300: '#2196F3', 500: '#1565C0' }} 
+          />
+          <TileButton 
+            icon={AttachMoneyIcon} 
+            title="Change Pricing" 
+            onClick={handleChangePricing} 
+            color={{ 300: '#BA68C8', 500: '#8E24AA' }} 
           />
         </Box>
         <Button
